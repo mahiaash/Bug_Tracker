@@ -4,12 +4,18 @@
 package view;
 
 
+import java.awt.Font;
+import java.awt.*;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
 /**
@@ -21,7 +27,7 @@ public class GUI {
 	/**
 	 * @param args
 	 */
-	public static void createUI() {
+	public static void createTaskAdderPage() {
 		String [] labels = {"Summary: ", "Bug Location: ", "Bug Level: ", " "};
 		int labelSize = labels.length;
 		System.out.println(labelSize);
@@ -32,8 +38,6 @@ public class GUI {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true); 
 		frame.setSize(500, 500);
-		
-		
 		
 		JPanel controller = new JPanel();
 		controller.setLayout(new SpringLayout());
@@ -59,20 +63,116 @@ public class GUI {
 		}
 		
 		Form.makeCompactGrid(controller, labelSize, 2, 6, 6, 6, 6);
-		
-		
-		
-		
-		
 		frame.setContentPane(controller);
 		controller.setOpaque(true);
 		frame.setContentPane(controller);
 	}
+	public static void createHomePage() {
+		//Create Frame and panel
+		JFrame homeFrame = new JFrame();
+		JPanel homePanel = new JPanel();
+		homeFrame.add(homePanel);
+		homeFrame.setContentPane(homePanel);
+		
+		//Implement GridBagLayout
+		homePanel.setLayout(new GridBagLayout());
+		GridBagConstraints gbConstraints = new GridBagConstraints();
+		
+		//Create Labels and add to panel
+		JLabel homeLabel = new JLabel("Welcome!");
+		homeLabel.setFont(new Font("Helvetica", Font.BOLD, 24));
+		homeLabel.setHorizontalAlignment(JLabel.CENTER);
+		gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gbConstraints.weightx = 0.5;
+		gbConstraints.gridx = 0;
+		gbConstraints.gridy = 0;
+		gbConstraints.gridwidth = 4;
+		gbConstraints.ipady = 40;
+		homePanel.add(homeLabel,gbConstraints);
+		
+		
+		JLabel currentLabel = new JLabel("Current Task: ");
+		currentLabel.setFont(new Font("Baskerville", Font.PLAIN, 12 ));
+		gbConstraints.fill = GridBagConstraints.BOTH;
+		gbConstraints.gridx = 0;
+		gbConstraints.gridy = 2;
+		gbConstraints.weightx = 1.0;
+		gbConstraints.weighty = 1.0;
+		homePanel.add(currentLabel, gbConstraints);
+		
+		JLabel foundLabel = new JLabel("Number of found bugs: ");
+		foundLabel.setFont(new Font("Baskerville", Font.PLAIN, 12 ));
+		gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gbConstraints.gridx = 0;
+		gbConstraints.gridy = 3;
+//		gbConstraints.weightx = 1.0;
+		homePanel.add(foundLabel, gbConstraints);
+		
+
+		JLabel solvedLabel = new JLabel("Number of Solved bugs: ");
+		solvedLabel.setFont(new Font("Baskerville", Font.PLAIN, 12 ));
+		gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gbConstraints.gridx = 0;
+		gbConstraints.gridy = 4;
+		gbConstraints.weightx = 1.0;
+//		gbConstraints.weighty = 1.0;
+		homePanel.add(solvedLabel, gbConstraints);		
+		
+		//Create TextField for putting and updating info
+		JTextField currentTaskText = new JTextField(2);
+		currentTaskText.setEditable(false);
+		currentTaskText.setText("later connected");
+		currentTaskText.setFont(new Font("Baskerville", Font.PLAIN, 12));
+		gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gbConstraints.gridx = 1;
+		gbConstraints.gridy = 2;
+		gbConstraints.weightx = 0.25;
+		gbConstraints.gridwidth = 1;
+		homePanel.add(currentTaskText, gbConstraints);
+		
+		
+		
+		
+		//Create Menu Bar and populate the menu
+		JMenuBar jMenuBar = new JMenuBar();
+		JMenu jmenu = new JMenu("Menu");
+		JMenuItem home = new JMenuItem("Home");
+		JMenuItem bugs = new JMenuItem("Bugs");
+		JMenuItem tasks = new JMenuItem("Tasks");
+		JMenuItem notifications = new JMenuItem("Notifications");
+		jMenuBar.add(jmenu);
+		jmenu.add(home);
+		jmenu.add(bugs);
+		jmenu.add(tasks);
+		jmenu.add(notifications);
+		
+		// add menu to panel and set Menu bar on the frame
+		homePanel.add(jMenuBar);
+		homeFrame.setJMenuBar(jMenuBar);
+		
+		//Frame operations
+		homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		homeFrame.pack();
+		homeFrame.setLocationRelativeTo(null);
+		homeFrame.setVisible(true); 
+		homeFrame.setSize(900, 600);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				createUI();
+//				createTaskAdderPage();
+				createHomePage();
 			}
 		});
 		

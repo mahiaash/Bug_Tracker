@@ -6,7 +6,7 @@ package model;
 public class Ticket {
 	/**
 	 * @param: summary, location and level
-	 * Creates a ticket and has get and change methods
+	 * Creates a ticket and has get and set methods
 	 */
 String summary;
 String location;
