@@ -18,6 +18,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
+import control.Listen;
+
 /**
  * @author mahia
  *
@@ -27,6 +29,10 @@ public class GUI {
 	/**
 	 * @param args
 	 */
+	static JPanel homePanel;
+	static Listen listens;
+//	static JPanel bugPanel;
+//	static JPanel universalPanel;
 	public static void createTaskAdderPage() {
 		String [] labels = {"Summary: ", "Bug Location: ", "Bug Level: ", " "};
 		int labelSize = labels.length;
@@ -70,10 +76,11 @@ public class GUI {
 	public static void createHomePage() {
 		//Create Frame and panel
 		JFrame homeFrame = new JFrame();
-		JPanel homePanel = new JPanel();
+		homePanel = new JPanel();
+		homePanel.setVisible(true);
 		homeFrame.add(homePanel);
 		homeFrame.setContentPane(homePanel);
-		
+//		universalPanel.add(homePanel);
 		//Implement GridBagLayout
 		homePanel.setLayout(new GridBagLayout());
 		GridBagConstraints gbConstraints = new GridBagConstraints();
@@ -118,19 +125,43 @@ public class GUI {
 //		gbConstraints.weighty = 1.0;
 		homePanel.add(solvedLabel, gbConstraints);		
 		
-		//Create TextField for putting and updating info
-		JTextField currentTaskText = new JTextField(2);
+		//Create TextField for putting and updating info on Current Task
+		JTextField currentTaskText = new JTextField(10);
 		currentTaskText.setEditable(false);
 		currentTaskText.setText("later connected");
 		currentTaskText.setFont(new Font("Baskerville", Font.PLAIN, 12));
-		gbConstraints.fill = GridBagConstraints.HORIZONTAL;
+		gbConstraints.fill = GridBagConstraints.REMAINDER;
 		gbConstraints.gridx = 1;
 		gbConstraints.gridy = 2;
-		gbConstraints.weightx = 0.25;
-		gbConstraints.gridwidth = 1;
+		gbConstraints.weightx = 0.2;
+		gbConstraints.gridwidth = 0;
 		homePanel.add(currentTaskText, gbConstraints);
 		
+		//Create TextField for putting and updating info on number of found bugs
 		
+		JTextField foundBugText = new JTextField(10);
+		foundBugText.setEditable(false);
+		foundBugText.setText("later connected");
+		foundBugText.setFont(new Font("Baskerville", Font.PLAIN, 12));
+		gbConstraints.fill = GridBagConstraints.REMAINDER;
+		gbConstraints.gridx = 1;
+		gbConstraints.gridy = 3;
+		gbConstraints.weightx = 0.2;
+		gbConstraints.gridwidth = 0;
+		homePanel.add(foundBugText, gbConstraints);
+		
+		// Create TextField for putting and updating info on number of solved bugs
+		
+		JTextField solvedBugText = new JTextField(10);
+		solvedBugText.setEditable(false);
+		solvedBugText.setText("later connected");
+		solvedBugText.setFont(new Font("Baskerville", Font.PLAIN, 12));
+		gbConstraints.fill = GridBagConstraints.REMAINDER;
+		gbConstraints.gridx = 1;
+		gbConstraints.gridy = 4;
+		gbConstraints.weightx = 0.2;
+		gbConstraints.gridwidth = 0;
+		homePanel.add(solvedBugText, gbConstraints);
 		
 		
 		//Create Menu Bar and populate the menu
@@ -150,6 +181,12 @@ public class GUI {
 		homePanel.add(jMenuBar);
 		homeFrame.setJMenuBar(jMenuBar);
 		
+		// adding action listener
+		listens = new Listen();
+		bugs.addActionListener(listens);
+		createBugPage();
+		
+		
 		//Frame operations
 		homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		homeFrame.pack();
@@ -160,7 +197,18 @@ public class GUI {
 	}
 	
 	
-	
+	public static void createBugPage() {
+		
+		JPanel bugPanel = new JPanel();
+//		homePanel.add(bugPanel);
+		homePanel.setVisible(false);
+		bugPanel.setVisible(true);
+		JTextField fie = new JTextField("BUG PAGE!!!!");
+		bugPanel.add(fie);
+		
+		
+		
+	}
 	
 	
 	
@@ -173,6 +221,7 @@ public class GUI {
 			public void run() {
 //				createTaskAdderPage();
 				createHomePage();
+				// Testing to show stuff
 			}
 		});
 		
